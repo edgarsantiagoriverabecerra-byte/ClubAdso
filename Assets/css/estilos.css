@@ -1,0 +1,99 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI''Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background-color:beige;
+    display:flex;
+    justify-content: center;/*horizontal*/
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+h2{
+    color:black;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align:center;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 10PX;
+}
+
+.grupo-input{
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo-input{
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button{
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor:pointer;
+    transition: background-color 0.2s;
+}
+
+input, select{
+    padding: 10px;
+    border: 1px solid skyblue;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+input:focus, select:focus{
+    border-color: rgb(54,54,212);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.contenedor_formulario{
+    background-color: cadetblue;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+button[type="submit"]{
+    background-color: cyan;
+    color: white;
+}
+
+/* Estilo para enlaces adicionales dentro del formulario */
+.texto-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.texto-link a {
+    color: #0056b3;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.texto-link a:hover {
+    text-decoration: underline;
+}
+
+/* Botón secundario o de cancelar alternativo si se requiere */
+button.btn-secundario {
+    background-color: #6c757d;
+    color: white;
+}
+
+button.btn-secundario:hover {
+    background-color: aqua;
+}
