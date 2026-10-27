@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -8,132 +8,152 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <title>Proyecto ADSO</title>
     <style>
-     .icono-tarjeta {
+        .icono-principal {
             font-size: 45px;
-            color: #00d8d6;
-            display: inline-block;
-            margin-bottom: 10px;
+            color: aqua;
         }
-         .icono-admin {
-            font-size: 45px;
-            color:brown; 
-            display: inline-block;
-            margin-bottom: 10px;
+
+        .header-mr {
+            background-color: cornflowerblue;
+            padding: 20px 30px;
+        }
+
+        .btn {
+            background-color: rgb(183, 23, 23);
+            color: white;
+        }
+
+        .modulo-card {
+            border-top: 4px solid rgb(41, 169, 205);
+            border-radius: 10px;
+            transition: 0.2s;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .modulo-card.asociado {
+            border-top: 4px solid rgb(6, 26, 141);
+        }
+
+        .modulo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
         }
     </style>
 </head>
 
 <body class="bg-light">
-    <div class="d-flex justify-content-between align-items-center bg-white p-3 shadow-sm mb-4">
-        <h3 class="m-0 fw-normal">CLUB ACERIAS - Panel principal</h3>
-        <div class="text-end d-flex align-items-center">
-            <small class="me-3">Pepitor Perez <span class="badge bg-danger ms-1">Administrador</span></small>
-            <button class="btn btn-danger btn-sm d-flex align-items-center gap-1">
-                <i class="bi bi-person-fill-dash"></i> Cerrar sesión
+    <div class="header-mr d-flex justify-content-between align-items-center">
+        <h3>CLUB ACERIAS - Panel principal</h3>
+        <div class="text-end">
+            <small id="nombreUsuario"></small>
+            <button class="btn btn-danger btn-sm mt-1" onclick="cerrarSesion()">
+                <i class="bi bi-person-heart me-1"></i>Cerrar sesión
             </button>
         </div>
     </div>
 
     <div class="container py-4">
-        
         <h5 class="mb-4 fw-bold">Módulos del club de asociados</h5>
-        <div class="row g-4 mb-5">
-
-            <div class="col-12 col-md-3">
-                <div class="card shadow-sm p-4 border-0 h-100 rounded-3">
-                    <div><i class="bi bi-people icono-tarjeta"></i></div>
-                    <h4 class="fw-bold">Asociados</h4>
-                    <strong class="mb-2 d-block">Gestión de asociados</strong>
-                    <p class="small text-muted mb-0">
-                        Administra la información de los asociados, incluyendo sus datos personales, historial de membresía y estado de cuenta.
+        <div id="tarjetasAdministrador" class="row g-4">
+            <div class="col-md-3">
+                <div class="card modulo-card shadow-sm p-3">
+                    <i class="bi bi-people icono-principal"></i>
+                    <h4 class="text-danger">Asociados</h4>
+                    <strong>Gestión de asociados</strong>
+                    <p class="small text-muted mt-2">
+                        Administra el registro completo de asociados con sus datos personales: documento, nombres,
+                        apellidos, fecha de nacimiento, dirección, teléfono y correo electrónico.
                     </p>
                 </div>
             </div>
-
-            <div class="col-12 col-md-3">
-                <div class="card shadow-sm p-4 border-0 h-100 rounded-3">
-                    <div><i class="bi bi-bar-chart-fill icono-tarjeta"></i></div>
-                    <h4 class="fw-bold">Actividades</h4>
-                    <strong class="mb-2 d-block">Gestión de actividades</strong>
-                    <p class="small text-muted mb-0">
-                        Planifica y coordina los eventos, reuniones y actividades recreativas disponibles para los miembros del club.
+            <div class="col-md-3">
+                <div class="card modulo-card shadow-sm p-3">
+                    <i class="bi bi-coin icono-principal"></i>
+                    <h4 class="text-danger">Préstamos</h4>
+                    <strong>Gestión de préstamos</strong>
+                    <p class="small text-muted mt-2">
+                        Controla los créditos solicitados por asociado, definiendo valor, tasa de interés, cuotas y
+                        fecha.
                     </p>
                 </div>
             </div>
-
-            <div class="col-12 col-md-3">
-                <div class="card shadow-sm p-4 border-0 h-100 rounded-3">
-                    <div><i class="bi bi-coin icono-tarjeta"></i></div>
-                    <h4 class="fw-bold">Pagos</h4>
-                    <strong class="mb-2 d-block">Gestión de pagos</strong>
-                    <p class="small text-muted mb-0">
-                        Registra y monitorea las cuotas de membresía, aportes mensuales y verifica los comprobantes de transacción.
+            <div class="col-md-3">
+                <div class="card modulo-card shadow-sm p-3">
+                    <i class="bi bi-calendar-check-fill icono-principal"></i>
+                    <h4 class="text-danger">Actividades</h4>
+                    <strong>Gestión de actividades</strong>
+                    <p class="small text-muted mt-2">
+                        Administra los eventos anuales de recaudo, la lista de participantes y la distribución
+                        automática del recaudo.
                     </p>
                 </div>
             </div>
-
-            <div class="col-12 col-md-3">
-                <div class="card shadow-sm p-4 border-0 h-100 rounded-3">
-                    <div><i class="bi bi-bank icono-tarjeta"></i></div>
-                    <h4 class="fw-bold">Préstamos</h4>
-                    <strong class="mb-2 d-block">Gestión de Préstamos</strong>
-                    <p class="small text-muted mb-0">
-                        Controla las solicitudes de crédito, tasas de interés, amortizaciones y el estado de la cartera de los asociados.
+            <div class="col-md-3">
+                <div class="card modulo-card shadow-sm p-3">
+                    <i class="bi bi-envelope-heart icono-principal"></i>
+                    <h4 class="text-danger">Reportes</h4>
+                    <strong>Consultas y saldos</strong>
+                    <p class="small text-muted mt-2">
+                        Genera reportes detallados y análisis completos del club. Explora consultas financieras
+                        avanzadas, saldos en tiempo real, estados de cuenta de asociados, control de cartera de
+                        préstamos y el
+                        balance histórico de los recaudos por actividades.
                     </p>
                 </div>
             </div>
         </div>
+    </div>
 
-        <h5 class="mb-4 fw-bold">Módulos de Administración</h5>
-        <div class="row g-4">
-            
-            <div class="col-12 col-md-3">
-                <div class="card shadow-sm p-4 border-0 h-100 rounded-3">
-                    <div><i class="bi bi-person-badge icono-admin"></i></div>
-                    <h4 class="fw-bold">Usuarios</h4>
-                    <strong class="mb-2 d-block">Gestión de acceso</strong>
-                    <p class="small text-muted mb-0">
-                        Administra las credenciales de los empleados y directivos, altas, bajas y restablecimiento de contraseñas.
+    <div class="container py-4">
+        <div id="tarjetasAsociados" class="row g-4 d-none">
+            <div class="col-md-3">
+                <div class="card modulo-card asociado shadow-sm p-3">
+                    <i class="bi bi-people icono-principal"></i>
+                    <h4 class="text-danger">Mis Datos</h4>
+                    <strong>Información Personal</strong>
+                    <p class="small text-muted mt-2">
+                        Consulta tus datos registrados en la plataforma: documento, nombres, apellidos, fecha de
+                        nacimiento, dirección, teléfono y correo electrónico.
                     </p>
                 </div>
             </div>
-
-            <div class="col-12 col-md-3">
-                <div class="card shadow-sm p-4 border-0 h-100 rounded-3">
-                    <div><i class="bi bi-gear icono-admin"></i></div>
-                    <h4 class="fw-bold">Configuración</h4>
-                    <strong class="mb-2 d-block">Parámetros del sistema</strong>
-                    <p class="small text-muted mb-0">
-                        Ajusta los parámetros generales del aplicativo, topes de préstamos, políticas de interés y datos del club.
+            <div class="col-md-3">
+                <div class="card modulo-card asociado shadow-sm p-3">
+                    <i class="bi bi-person-standing icono-principal"></i>
+                    <h4 class="text-danger">Mis Préstamos</h4>
+                    <strong>Simulación y Estado</strong>
+                    <p class="small text-muted mt-2">
+                        Consulta tus préstamos activos, revisa el valor acordado, la tasa de interés, las cuotas
+                        asignadas y la fecha del crédito.
                     </p>
                 </div>
             </div>
-
-            <!-- Tarjeta 7: Reportes -->
-            <div class="col-12 col-md-3">
-                <div class="card shadow-sm p-4 border-0 h-100 rounded-3">
-                    <div><i class="bi bi-file-earmark-bar-graph icono-admin"></i></div>
-                    <h4 class="fw-bold">Reportes</h4>
-                    <strong class="mb-2 d-block">Estadísticas y auditoría</strong>
-                    <p class="small text-muted mb-0">
-                        Genera informes detallados consolidados sobre ingresos, egresos, morosidad y movimientos generales.
+            <div class="col-md-3">
+                <div class="card modulo-card asociado shadow-sm p-3">
+                    <i class="bi bi-calendar-check-fill icono-principal"></i>
+                    <h4 class="text-danger">Actividades</h4>
+                    <strong>Participación y Recaudo</strong>
+                    <p class="small text-muted mt-2">
+                        Inscríbete libremente en los eventos anuales del club y consulta el dinero recaudado junto con
+                        el 50% distribuido entre los asociados participantes.
                     </p>
                 </div>
             </div>
-
-            <div class="col-12 col-md-3">
-                <div class="card shadow-sm p-4 border-0 h-100 rounded-3">
-                    <div><i class="bi bi-shield-lock icono-admin"></i></div>
-                    <h4 class="fw-bold">Seguridad</h4>
-                    <strong class="mb-2 d-block">Roles y Permisos</strong>
-                    <p class="small text-muted mb-0">
-                        Define niveles de autorización y controla a qué módulos específicos tiene acceso cada perfil del sistema.
+            <div class="col-md-3">
+                <div class="card modulo-card asociado shadow-sm p-3">
+                    <i class="bi bi-bag-heart-fill icono-principal"></i>
+                    <h4 class="text-danger">Mis Pagos</h4>
+                    <strong>Historial de Pagos</strong>
+                    <p class="small text-muted mt-2">
+                        Realiza y verifica los comprobantes de tus cuotas pagadas mensualmente, así como el saldo
+                        pendiente de cada uno de tus préstamos.
                     </p>
                 </div>
             </div>
-
         </div>
     </div>
 </body>
+<script src="../Controladores/dashboard.js"></script>
 
 </html>
