@@ -1,27 +1,36 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const logueado = localStorage.getItem('logueado');
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const respuesta = await fetch('../Modelos/sesion.php');
+        if (respuesta.status === 401) {
+            window.location.href = 'Login.html';
+            return;
+        }
+        if (!respuesta.ok) {
+            throw new Error('No fue posible validar la sesión');
+        }
 
-    if (logueado !== 'true') {
-        window.location.href = 'login.html';
-        return;
-    }
-
-    const nombre = localStorage.getItem('nombre');
-    const rol = localStorage.getItem('rol');
-
-    document.getElementById('nombreUsuario').textContent = nombre;
-
-    if (rol === 'admin') {
-        document.getElementById('tarjetasAdministrador').classList.remove('d-none');
-        document.getElementById('tarjetasAsociados').classList.add('d-none');
-    } else {
+        const resultado = await respuesta.json();
+        const usuario = resultado.usuario;
+        document.getElementById('nombreUsuario').textContent = usuario.nombre;
         document.getElementById('tarjetasAdministrador').classList.add('d-none');
-        document.getElementById('tarjetasAsociados').classList.remove('d-none');    
+        document.getElementById('tarjetasAsociados').classList.remove('d-none');
+    } catch (error) {
+        console.error('Error al validar la sesión:', error);
+        document.getElementById('nombreUsuario').textContent =
+            'No fue posible validar la sesión. Recarga la página para intentarlo de nuevo.';
     }
 });
 
 
-function cerrarSesion() {
-    localStorage.clear();
-    window.location.href = '../vista/login.html';
+async function cerrarSesion() {
+    try {
+        const respuesta = await fetch('../Modelos/cerrarSesion.php', { method: 'POST' });
+        if (!respuesta.ok) {
+            throw new Error('No fue posible cerrar la sesión');
+        }
+        window.location.href = 'Login.html';
+    } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+        alert('No fue posible cerrar la sesión. Verifique la conexión e inténtelo de nuevo.');
+    }
 }

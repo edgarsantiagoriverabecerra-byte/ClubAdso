@@ -1,24 +1,33 @@
-const usuarios = [
-    { usuario: 'admin@gmail.com', clave: '123', rol: 'admin', nombre: 'Santiago-Admin' },
-    { usuario: 'pepito@gmail.com', clave: '123', rol: 'asociado', nombre: 'Juan Perez' }
-];
+const formulario = document.getElementById("formLogin");
+const mensaje = document.getElementById("mensajeLogin");
 
-document.getElementById('formLogin').addEventListener('submit', function (event) {
+formulario.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const usuarioInput = document.getElementById('Email').value;
-    const claveInput = document.getElementById('Password').value;
+    const botonIngresar = formulario.querySelector('button[type="submit"]');
+    const credenciales = Object.fromEntries(new FormData(formulario).entries());
 
-    const usuarioEncontrado = usuarios.find(
-        u => u.usuario === usuarioInput && u.clave === claveInput
-    );
+    botonIngresar.disabled = true;
+    mensaje.textContent = "Verificando...";
 
-    if (usuarioEncontrado) {
-        localStorage.setItem('logueado', 'true');
-        localStorage.setItem('rol', usuarioEncontrado.rol);
-        localStorage.setItem('nombre', usuarioEncontrado.nombre);
-        window.location.href = 'dashboard.html';
-    } else {
-        alert('Usuario o contraseña incorrectos');
+    try {
+        const respuesta = await fetch(formulario.action, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(credenciales)
+        });
+        const resultado = await respuesta.json();
+
+        if (!respuesta.ok || !resultado.success) {
+            mensaje.textContent = resultado.mensaje || "Correo o contraseña incorrectos.";
+            return;
+        }
+
+        window.location.href = "dashboard.html";
+    } catch (error) {
+        console.error("Error al iniciar sesión:", error);
+        mensaje.textContent = "No fue posible iniciar sesión. Verifique la conexión e inténtelo de nuevo.";
+    } finally {
+        botonIngresar.disabled = false;
     }
 });
