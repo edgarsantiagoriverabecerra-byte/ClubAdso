@@ -1,69 +1,42 @@
-const formulario = document.getElementById("formRegistro");
+const formulario = document.getElementById("FormRegistro")
 
 formulario.addEventListener("submit", async function (event) {
-    // Evita recargar la página al enviar el formulario
+    //evita recargar la pagina al enviar el formulario
     event.preventDefault();
 
     const botonGuardar = formulario.querySelector('button[type="submit"]');
-    const mensajeRegistro = document.getElementById("mensajeRegistro");
 
-    // Lee los campos del formulario y los convierte en un objeto
-    const asociado = Object.fromEntries(new FormData(formulario).entries());
+    //los datos del formulario los convierte en objetos
+    const asocido = Object.fromEntries(new FormData(formulario).entries())
 
-    if((asociado.password !== asociado.password_confirm)) {
-        document.getElementById("mensajeRegistro").textContent = 
-        "Las contraseñas no coinciden.";
+    if (asocido.contraseña !== asocido.confirmarContraseña) {
+        document.getElementById("mensajeRegistro").textContent =
+         "Las contraseñas no coinciden.";
+        return;
     }
-    delete asociado.password_confirm; // Elimina el campo de confirmación antes de enviar
+
+    delete asocido.confirmarContraseña;
     
-        // Deshabilita el botón mientras se procesa
-    if (botonGuardar) botonGuardar.disabled = true; 
+    botonGuardar.disabled = true;//deshabilita el boton mientras se termina el proceso
 
     try {
-        if (mensajeRegistro) {
-            mensajeRegistro.textContent = "Guardando...";
-            mensajeRegistro.dataset.tipo = '';
-        }
+        const respuesta = await fetch(formulario.action, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(asocido) });
 
-        // Obtiene la URL del action del formulario o usa una ruta relativa por defecto
-        const urlDestino = formulario.action || "../Modelo/registrar.php";
+        //pasar la respuesta JSNO a un objeto de javascript
+        const resultado = await respuesta.json();
+        document.getElementById("mensajeRegistro").dataset.tipo = '';//limpia cualquier mensaje anterior
 
-        const respuesta = await fetch(urlDestino, { 
-            method: "POST", 
-            headers: { 
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }, 
-            body: JSON.stringify(asociado) 
-        });
-
-        // Validar si la respuesta del servidor es correcta en texto antes de parsear a JSON
-        const textoRespuesta = await respuesta.text();
-        let resultado;
-        
-        try {
-            resultado = JSON.parse(textoRespuesta);
-        } catch (e) {
-            console.error("La respuesta del servidor no es un JSON válido:", textoRespuesta);
-            throw new Error("El servidor no devolvió un JSON válido.");
-        }
-
-        if (mensajeRegistro) {
-            mensajeRegistro.textContent = resultado.mensaje || "Operación procesada.";
-        }
+        document.getElementById("mensajeRegistro").textContent = resultado.mensaje;
 
         if (respuesta.ok && resultado.success) {
-            formulario.reset(); // Limpia el formulario si la respuesta es exitosa
+            formulario.reset();//limpia el formulario si la solicitud fue exitosa
         }
 
     } catch (error) {
-        console.error("Error al enviar el formulario:", error);
-        if (mensajeRegistro) {
-            mensajeRegistro.textContent = "Error al enviar el formulario. Por favor, inténtelo de nuevo.";
-            mensajeRegistro.dataset.tipo = 'error';
-        }
+        console.error("Error al enviar el formulario", error)
+        document.getElementById("mensajeRegistro").textContent= "Ocurrió un error. Por favor, intentalo de nuevo."
     } finally {
-        // Habilita el botón de guardar nuevamente
-        if (botonGuardar) botonGuardar.disabled = false; 
+        botonGuardar.disabled = false;//Habilita el boton nuevamente
     }
-});
+}
+)

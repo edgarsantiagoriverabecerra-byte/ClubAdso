@@ -1,101 +1,107 @@
+<!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <title>CLUB ADSO</title> 
-        <link rel="stylesheet" href="../Assets/css/estilos.css">
 
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Proyecto ADSO</title>
+    <link rel="stylesheet" href="../Assets/css/estilos.css">
+</head>
 
-    <body>
-        <div class="contenedor_formulario">
-            <h2> Registro de Asociado - Acerias </h2>
-
-            <form id="formRegistro" action="../Modelos/guardarAsociado.php" method="post">
+<body>
+    <div class="Contenedorformulario">
+        <div>
+            <h2>Registro de asociado - Acerias</h2>
+            <form id="FormRegistro" action="../Modelos/guardarAsociado.php" method="post">
                 <div class="grupo-input">
-                    <label> Ingresar Documento: </label>
-                    <input id="Documento" name="documento" type="text" required placeholder="ejemplo: 1057000111">
+                    <label>Ingresar Documento</label>
+                    <input id="documento" name="documento" type="number" placeholder="Ejemplo:1052841571">
                 </div>
-
                 <div class="grupo-input">
-                    <label>Nombres: </label>
-                    <input type="text" id="Nombre" name="nombre" required placeholder="Ingrese nombres completos">
+                    <label>Ingresar Nombre</label>
+                    <input id="nombres" name="nombres" type="text" required placeholder="Ingrese nombres completos">
                 </div>
-
-                 <div class="grupo-input">
-                    <label>Apellidos: </label>
-                    <input type="text" id="Apellido" name="apellido" required placeholder="Ingrese apellidos completos">
+                <div class="grupo-input">
+                    <label>Ingresar Apellido</label>
+                    <input id="apellidos" name="apellidos" type="text" required placeholder="Ingrese apellidos completos">
                 </div>
-
-                 <div class="grupo-input">
-                    <label>Fecha de Nacimiento: </label>
-                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                <div class="grupo-input">
+                    <label>Ingresar Fecha de Nacimiento</label>
+                    <input id="fechaNacimiento" name="fechaNacimiento" type="date" required placeholder="Ingrese Fecha de Nacimiento">
                 </div>
-
-                 <div class="grupo-input">
-                    <label>Direccion de Residencia: </label>
-                    <input type="text" id="direccionResidencia" name="direccionResidencia" required placeholder="Ejm: Calle">
+                <div class="grupo-input">
+                    <label>Seleccione su Genero</label>
+                    <label>
+                        <input type="radio" id="Femenino" name="genero" value="Femenino" required>
+                        <span>Femenino</span>
+                    </label>
+                    <label>
+                        <input type="radio" id="Masculino" name="genero" value="Masculino" required>
+                        <span>Masculino</span>
+                    </label>
+                    <label>
+                        <input type="radio" id="Otro" name="genero" value="Otro" required>
+                        <span>Otro</span>
+                    </label>
                 </div>
-
-                 <div class="grupo-input">
-                    <label>Ciudad: </label>
+                <div class="grupo-input">
+                    <label>Ingresar Direccion de Residencia</label>
+                    <input id="direccionResidencia" name="direccionResidencia" type="text" required placeholder="Ejemplo:Calle 18#4-111">
+                </div>
+                <div class="grupo-input">
+                    <label>Ingresar ciudad</label>
                     <select id="ciudad" name="ciudad" required>
                         <option value="Sogamoso">Sogamoso</option>
                         <option value="Duitama">Duitama</option>
                         <option value="Tunja">Tunja</option>
                     </select>
                 </div>
-
-                 <div class="grupo-input">
-                    <label>Telefono: </label>
-                    <input type="text" id="Telefono" name="telefono" required placeholder="3122478951">
+                <div class="grupo-input">
+                    <label>Ingresar telefono</label>
+                    <input id="telefono" name="telefono" type="tel" required placeholder="Ejemplo: 3102045293">
                 </div>
-
-                  <div class="grupo-input">
-                    <label>Email: </label>
-                    <input type="email" id="Email" name="email" required placeholder="correo@ejemplo.com">
+                <div class="grupo-input">
+                    <label>Ingresar Correo Electronico</label>
+                    <input id="email" name="email" type="text" required placeholder="Ejemplo:correo@gmail.com">
                 </div>
-
-                 <div class="grupo-input">
-                    <label for="Password">Contraseña (mínimo 8 caracteres): </label>
-                    <input type="password" id="Password" name="password" required minlength="8" autocomplete="new-password">
+                <div class="grupo-input">
+                    <label>Crea un contraseña:</label>
+                    <input 
+                    type="password"
+                    id="contraseña" 
+                    name="contraseña"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                    placeholder="Minimo 8 caracteres"
+                    >
                 </div>
-
-                  <div class="grupo-input">
-                    <label for="PasswordConfirm">Confirmar Contraseña (mínimo 8 caracteres): </label>
-                    <input type="password" id="PasswordConfirm" name="password_confirm" required minlength="8" autocomplete="new-password">
+                <div class="grupo-input">
+                    <label>Confirme su contraseña:</label>
+                    <input 
+                    type="password"
+                    id="confirmarContraseña" 
+                    name="confirmarContraseña"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                    placeholder="Escribe la nueva contraseña"
+                    >
                 </div>
-
-                 <div class="grupo-input">
-                    <label>Genero: </label>
-
-                    <label>
-                        <input type="radio" id="masculino" name="genero" value="Masculino" required>
-                        <span> Masculino</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" id="femenino" name="genero" value="Femenino">
-                        <span> Femenino</span>
-                    </label>
-
-                     <label>
-                        <input type="radio" id="otro" name="genero" value="Otro">
-                        <span> Otro</span>
-                    </label>
-                </div>
-
                 <div class="grupo-botones">
-                    <button type="submit"> Guardar</button>
-                    <button type="reset"> Limpiar Formulario</button>
-
+                    <button type="submit">Registrarme</button>
                 </div>
-                <p id="mensajeRegistro" role="status" aria-live="polite"></p>
+                <div class="grupo-botones">
+                    <button type="reset">Borrar</button>
+                </div>
+                <p id="mensajeRegistro" role="status" aria-live="polite">
+
+                </p>
             </form>
-            <p class="texto-link">
+            <p style="text-align: center; margin-top: 15px; font-size: 14px;">
                 ¿Ya tienes una cuenta? <a href="Login.html">Inicia sesión aquí</a>
             </p>
-
         </div>
-    </body>
-     <script src="../Controladores/Asociado.js"></script>
+    </div>
+    <script src="../Controladores/Asociado.js"></script>
+</body>
 </html>

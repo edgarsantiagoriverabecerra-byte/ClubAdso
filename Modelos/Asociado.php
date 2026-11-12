@@ -1,62 +1,56 @@
 <?php
+
 require_once __DIR__ . '/../Config/conexion.php';
 
 class Asociado {
     private $documento;
     private $nombres;
     private $apellidos;
+    private $fechaNacimiento;
+    private $genero;
     private $direccionResidencia;
     private $ciudad;
     private $telefono;
     private $email;
-    private $genero;
-    private $fechaNacimiento;
-    private $password_hash;
-
+    private $contraseña;
     private $conexion;
 
-    public function __construct($datos) {
-        $this->documento = $datos['documento'] ?? '';
-        $this->nombres = $datos['nombres'] ?? '';
-        $this->apellidos = $datos['apellidos'] ?? '';
-        $this->direccionResidencia = $datos['direccionResidencia'] ?? ($datos['direcciónResidencia'] ?? '');
-        $this->ciudad = $datos['ciudad'] ?? '';
-        $this->telefono = $datos['telefono'] ?? '';
-        $this->email = $datos['email'] ?? '';
-        $this->genero = $datos['genero'] ?? '';
-        $this->fechaNacimiento = $datos['fechaNacimiento'] ?? '';
-        $this->password_hash = password_hash($datos['password_hash'] ?? '', PASSWORD_DEFAULT);
+    public function __construct($datos)
+    {
+        $this->documento = $datos['documento'];
+        $this->nombres = $datos['nombres'];
+        $this->apellidos = $datos['apellidos'];
+        $this->fechaNacimiento = $datos['fechaNacimiento'];
+        $this->genero = $datos['genero'];
+        $this->direccionResidencia = $datos['direccionResidencia'];
+        $this->ciudad = $datos['ciudad'];
+        $this->email = $datos['email'];
+        $this->telefono = $datos['telefono'];
+        $this->contraseña = password_hash($datos['contraseña'], PASSWORD_DEFAULT);
 
-        $conexion = new Conexion();
-        $this->conexion = $conexion->conectar();
+        $conexionDB = new Conexion();
+        $this->conexion = $conexionDB->conectar();
     }
 
-    public function guardar() {
-        $params = [
+    public function guardar()
+    {
+        $sql = "INSERT INTO asociados (documento, nombres, apellidos, fechaNacimiento, genero, direccionResidencia, ciudad, email, telefono, contraseña) 
+                VALUES (:documento, :nombres, :apellidos, :fechaNacimiento, :genero, :direccionResidencia, :ciudad, :email, :telefono, :contrasena)";
+        
+        $consulta = $this->conexion->prepare($sql);
+        
+        return $consulta->execute([
             ":documento" => $this->documento,
             ":nombres" => $this->nombres,
             ":apellidos" => $this->apellidos,
+            ":fechaNacimiento" => $this->fechaNacimiento,
+            ":genero" => $this->genero,
             ":direccionResidencia" => $this->direccionResidencia,
             ":ciudad" => $this->ciudad,
-            ":telefono" => $this->telefono,
             ":email" => $this->email,
-            ":genero" => $this->genero,
-            ":fechaNacimiento" => $this->fechaNacimiento,
-            ":password_hash" => $this->password_hash,
-        ];
-
-        try {
-            $sql = "INSERT INTO asociados (documento, nombres, apellidos, direccionResidencia, ciudad, telefono, email, genero, fechaNacimiento, password_hash) VALUES (:documento, :nombres, :apellidos, :direccionResidencia, :ciudad, :telefono, :email, :genero, :fechaNacimiento, :password_hash)";
-            $consulta = $this->conexion->prepare($sql);
-            return $consulta->execute($params);
-        } catch (PDOException $e) {
-            // Compatibilidad por si la columna en MySQL fue creada con tilde (`direcciónResidencia`)
-            if (strpos($e->getMessage(), 'direccionResidencia') !== false) {
-                $sql = "INSERT INTO asociados (documento, nombres, apellidos, `direcciónResidencia`, ciudad, telefono, email, genero, fechaNacimiento, password_hash) VALUES (:documento, :nombres, :apellidos, :direccionResidencia, :ciudad, :telefono, :email, :genero, :fechaNacimiento, :password_hash)";
-                $consulta = $this->conexion->prepare($sql);
-                return $consulta->execute($params);
-            }
-            throw $e;
-        }
+            ":telefono" => $this->telefono,
+            ":contrasena" => $this->contraseña
+        ]);
     }
 }
+?>

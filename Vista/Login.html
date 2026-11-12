@@ -1,37 +1,38 @@
-<html lang="es">
+<!DOCTYPE html>
+<html>
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLUB ADSO - Iniciar Sesión</title> 
+    <meta charset="UTF-8">
+    <title>Proyecto ADSO</title>
     <link rel="stylesheet" href="../Assets/css/estilos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="contenedor-registro">
-        <h2>Iniciar Sesión - Acerías</h2>
-
-        <form id="formLogin" action="../Modelos/iniciarSesion.php" method="post">
+    <div>
+        <h2>Inicio de Sesión</h2>
+        <form id="formLogin" action="../Modelos/Login.php" method="POST">
             <div class="grupo-input">
-                <label for="Email">Correo Electrónico:</label>
-                <input type="email" id="Email" name="email" required autocomplete="email" placeholder="correo@ejemplo.com">
+                <label for="email" required>Correo</label>
+                <input type="email" id="email" name="email" required placeholder="ejemplo@gmail.com" />
             </div>
-
             <div class="grupo-input">
-                <label for="Password">Contraseña:</label>
-                <input type="password" id="Password" name="password" required autocomplete="current-password" placeholder="Ingrese su contraseña">
+                <label for="password">Contraseña</label>
+                <input type="password" id="contraseña" name="contraseña" required placeholder="Ingrese su Contraseña" />
             </div>
-
             <div class="grupo-botones">
-                <button type="submit">Ingresar</button>
-                <button type="reset" class="btn-secundario">Cancelar</button>
+                <button type="submit" class="animacion">Iniciar Sesión</button>
             </div>
-            
-            <p class="texto-link">
-                ¿No tienes una cuenta? <a href="Registro.html">Regístrate aquí</a>
-            </p>
-            <p id="mensajeLogin" role="status" aria-live="polite"></p>
+            <div class="grupo-botones">
+                <button type="reset" class="animacion">Borrar</button>
+            </div>
         </form>
+        <p id="mensajeLogin" name="mensajeLogin" class="text-danger mt-3 mb-0"></p>
+        <p style="text-align: center; margin-top: 15px; font-size: 14px;">
+            ¿No tienes una cuenta? <a href="Registro.html">Regístrate aquí</a>
+        </p>
     </div>
 </body>
-<script src="../Controladores/login.js"></script>
+<script src="../Controladores/login.js"> </script>
+
 </html>

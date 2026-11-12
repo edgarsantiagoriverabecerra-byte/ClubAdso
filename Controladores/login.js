@@ -1,33 +1,37 @@
 const formulario = document.getElementById("formLogin");
-const mensaje = document.getElementById("mensajeLogin");
 
-formulario.addEventListener("submit", async function (event) {
-    event.preventDefault();
+formulario.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-    const botonIngresar = formulario.querySelector('button[type="submit"]');
-    const credenciales = Object.fromEntries(new FormData(formulario).entries());
+    const boton = formulario.querySelector('button[type="submit"]');
+    const mensaje = document.getElementById("mensajeLogin");
 
-    botonIngresar.disabled = true;
-    mensaje.textContent = "Verificando...";
+    boton.disabled = true;
+    mensaje.textContent = "";
 
     try {
         const respuesta = await fetch(formulario.action, {
-            method: "POST",
+            method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(credenciales)
+            body: JSON.stringify(Object.fromEntries(new FormData(formulario).entries()))
         });
+
         const resultado = await respuesta.json();
 
-        if (!respuesta.ok || !resultado.success) {
-            mensaje.textContent = resultado.mensaje || "Correo o contraseña incorrectos.";
+        if (!resultado.success) {
+            mensaje.textContent = "No fue posible iniciar sesión, verifique su usuario o contraseña.";
             return;
         }
 
+        localStorage.setItem('logueado', 'true');
+        localStorage.setItem('rol', resultado.rol);
+        localStorage.setItem('nombre', resultado.nombre);
+
         window.location.href = "dashboard.html";
     } catch (error) {
-        console.error("Error al iniciar sesión:", error);
-        mensaje.textContent = "No fue posible iniciar sesión. Verifique la conexión e inténtelo de nuevo.";
+        console.error("Error al iniciar sesión", error);
+        mensaje.textContent = "Ocurrió un error al iniciar sesión, por favor vuelve a intentarlo.";
     } finally {
-        botonIngresar.disabled = false;
+        boton.disabled = false;
     }
 });

@@ -10,21 +10,26 @@
     <style>
         .icono-principal {
             font-size: 45px;
-            color: aqua;
+            color: rgb(255, 0, 0);
+        }
+        .icono-principalasociado {
+            font-size: 45px;
+            color: rgba(17, 0, 255, 0.76);
         }
 
         .header-mr {
-            background-color: cornflowerblue;
+            background-color: rgb(223, 75, 75);
+            color: white;
             padding: 20px 30px;
         }
 
         .btn {
-            background-color: rgb(183, 23, 23);
+            background-color: black;
             color: white;
         }
 
         .modulo-card {
-            border-top: 4px solid rgb(41, 169, 205);
+            border-top: 4px solid rgb(136, 11, 11);
             border-radius: 10px;
             transition: 0.2s;
             cursor: pointer;
@@ -37,25 +42,23 @@
 
         .modulo-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+            transform: scale(1.05);
+            box-shadow: 0 10px #b6b1b1 !important;
         }
     </style>
 </head>
 
-<body class="bg-light">
-    <div class="header-mr d-flex justify-content-between align-items-center">
+<body class="bg-ligth">
+    <div class="header-mr d-flex justify-content-between alling-items-center">
         <h3>CLUB ACERIAS - Panel principal</h3>
         <div class="text-end">
             <small id="nombreUsuario"></small>
-            <button class="btn btn-danger btn-sm mt-1" onclick="cerrarSesion()">
-                <i class="bi bi-person-heart me-1"></i>Cerrar sesión
-            </button>
+            <button class="btn btn-danger btn-sm" onclick="cerrarSecion()"><i class="bi bi-person-heart"></i>Cerrar sesión</button>
         </div>
     </div>
-
     <div class="container py-4">
         <h5 class="mb-4 fw-bold">Módulos del club de asociados</h5>
-        <div id="tarjetasAdministrador" class="row g-4 d-none">
+        <div id="tarjetasAdministrador" class="row g-4">
             <div class="col-md-3">
                 <div class="card modulo-card shadow-sm p-3">
                     <i class="bi bi-people icono-principal"></i>
@@ -69,7 +72,7 @@
             </div>
             <div class="col-md-3">
                 <div class="card modulo-card shadow-sm p-3">
-                    <i class="bi bi-coin icono-principal"></i>
+                    <i class="bi bi-person-standing icono-principal"></i>
                     <h4 class="text-danger">Préstamos</h4>
                     <strong>Gestión de préstamos</strong>
                     <p class="small text-muted mt-2">
@@ -96,8 +99,8 @@
                     <strong>Consultas y saldos</strong>
                     <p class="small text-muted mt-2">
                         Genera reportes detallados y análisis completos del club. Explora consultas financieras
-                        avanzadas, saldos en tiempo real, estados de cuenta de asociados, control de cartera de
-                        préstamos y el
+                        avanzadas,
+                        saldos en tiempo real, estados de cuenta de asociados, control de cartera de préstamos y el
                         balance histórico de los recaudos por actividades.
                     </p>
                 </div>
@@ -105,14 +108,19 @@
         </div>
     </div>
 
-    <div class="container py-4">
-        <div id="tarjetasAsociados" class="row g-4 d-none">
+    <div id="tarjetasAsociado" class="container py-4 d-none">
+        <div id="tarjetasAsociados" class="row g-4">
             <div class="col-md-3">
                 <div class="card modulo-card asociado shadow-sm p-3">
-                    <i class="bi bi-people icono-principal"></i>
-                    <h4 class="text-danger">Mis Datos</h4>
+                    <i class="bi bi-people icono-principalasociado"></i>
+                    <h4 class="text-primary">Mis Datos</h4>
                     <strong>Información Personal</strong>
                     <p class="small text-muted mt-2">
+
+
+
+
+                        
                         Consulta tus datos registrados en la plataforma: documento, nombres, apellidos, fecha de
                         nacimiento, dirección, teléfono y correo electrónico.
                     </p>
@@ -120,8 +128,8 @@
             </div>
             <div class="col-md-3">
                 <div class="card modulo-card asociado shadow-sm p-3">
-                    <i class="bi bi-person-standing icono-principal"></i>
-                    <h4 class="text-danger">Mis Préstamos</h4>
+                    <i class="bi bi-person-standing icono-principalasociado"></i>
+                    <h4 class="text-primary">Mis Préstamos</h4>
                     <strong>Simulación y Estado</strong>
                     <p class="small text-muted mt-2">
                         Consulta tus préstamos activos, revisa el valor acordado, la tasa de interés, las cuotas
@@ -131,8 +139,8 @@
             </div>
             <div class="col-md-3">
                 <div class="card modulo-card asociado shadow-sm p-3">
-                    <i class="bi bi-calendar-check-fill icono-principal"></i>
-                    <h4 class="text-danger">Actividades</h4>
+                    <i class="bi bi-calendar-check-fill icono-principalasociado"></i>
+                    <h4 class="text-primary">Actividades</h4>
                     <strong>Participación y Recaudo</strong>
                     <p class="small text-muted mt-2">
                         Inscríbete libremente en los eventos anuales del club y consulta el dinero recaudado junto con
@@ -142,8 +150,8 @@
             </div>
             <div class="col-md-3">
                 <div class="card modulo-card asociado shadow-sm p-3">
-                    <i class="bi bi-bag-heart-fill icono-principal"></i>
-                    <h4 class="text-danger">Mis Pagos</h4>
+                    <i class="bi bi-bag-heart-fill icono-principalasociado"></i>
+                    <h4 class="text-primary">Mis Pagos</h4>
                     <strong>Historial de Pagos</strong>
                     <p class="small text-muted mt-2">
                         Realiza y verifica los comprobantes de tus cuotas pagadas mensualmente, así como el saldo
@@ -154,6 +162,5 @@
         </div>
     </div>
 </body>
-<script src="../Controladores/dashboard.js"></script>
-
+<script src="../Controladores/dashboard.js"> </script>
 </html>

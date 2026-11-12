@@ -1,36 +1,33 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const respuesta = await fetch('../Modelos/sesion.php');
-        if (respuesta.status === 401) {
-            window.location.href = 'Login.html';
-            return;
-        }
-        if (!respuesta.ok) {
-            throw new Error('No fue posible validar la sesión');
-        }
+document.addEventListener('DOMContentLoaded', () => {
+    const logueado = localStorage.getItem('logueado');
+    if (logueado !== 'true') {
+        window.location.href = '../Vista/Login.html';
+        return;
+    }
+    const nombre = localStorage.getItem('nombre');
+    const rol = localStorage.getItem('rol');
 
-        const resultado = await respuesta.json();
-        const usuario = resultado.usuario;
-        document.getElementById('nombreUsuario').textContent = usuario.nombre;
-        document.getElementById('tarjetasAdministrador').classList.add('d-none');
-        document.getElementById('tarjetasAsociados').classList.remove('d-none');
-    } catch (error) {
-        console.error('Error al validar la sesión:', error);
-        document.getElementById('nombreUsuario').textContent =
-            'No fue posible validar la sesión. Recarga la página para intentarlo de nuevo.';
+    document.getElementById('nombreUsuario').textContent = nombre
+
+    if (rol === 'admin') {
+        document.getElementById('tarjetasAdministrador').classList.remove('d-none')
+        document.getElementById('tarjetasAsociado').classList.add('d-none')
+    } else {
+        document.getElementById('tarjetasAdministrador').classList.add('d-none')
+        document.getElementById('tarjetasAsociado').classList.remove('d-none')
     }
 });
 
-
-async function cerrarSesion() {
+async function cerrarSecion() {
     try {
-        const respuesta = await fetch('../Modelos/cerrarSesion.php', { method: 'POST' });
+        const respuesta = await fetch("../Modelos/cerrarSesion.php", {method: "POST"}) 
+
         if (!respuesta.ok) {
-            throw new Error('No fue posible cerrar la sesión');
+            throw new ("Error al cerrar sesión")
         }
+        localStorage.clear();
         window.location.href = 'Login.html';
     } catch (error) {
-        console.error('Error al cerrar sesión:', error);
-        alert('No fue posible cerrar la sesión. Verifique la conexión e inténtelo de nuevo.');
+        console.error("Error al cerrar sesión", error);
     }
 }
