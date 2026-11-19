@@ -23,7 +23,7 @@ try {
         throw new Exception("Email o contraseña inválidos");
     }
 
-    require_once __DIR__ . '/../Confi/conexion.php';
+    require_once __DIR__ . '/../Config/conexion.php';
     $conexionObj = new Conexion();
     $conexion = $conexionObj->conectar();
 
