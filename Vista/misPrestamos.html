@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Préstamos: Simulación y Estado - Club Acerías</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+
+<body class="bg-light">
+    <div class="container py-4">
+        <!-- Encabezado -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="text-primary fw-bold mb-0">
+                    <i class="bi bi-calculator-fill me-2"></i>Mis Préstamos: Simulación y Estado
+                </h3>
+                <small class="text-muted">Simula nuevos créditos y consulta el estado de tus préstamos activos</small>
+            </div>
+            <a href="dashboard.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left me-1"></i> Volver al Panel
+            </a>
+        </div>
+
+        <div id="mensajeAlerta" class="alert d-none" role="alert"></div>
+
+        <div class="row g-4">
+            <!-- 1. Simulador de Préstamos -->
+            <div class="col-lg-5">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-sliders me-1"></i> Simulador de Crédito
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="formSimulador">
+                            <div class="mb-3">
+                                <label for="simMonto" class="form-label fw-semibold">Valor Deseado ($ COP)</label>
+                                <input type="number" step="10000" min="100000" max="50000000" class="form-control" id="simMonto" value="2000000" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="simTasa" class="form-label fw-semibold">Tasa Mensual (%)</label>
+                                    <input type="number" step="0.01" min="0.1" max="10" class="form-control" id="simTasa" value="0.25" readonly required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="simCuotas" class="form-label fw-semibold">N° Cuotas</label>
+                                    <select class="form-select" id="simCuotas" required>
+                                        <option value="6">6 Meses</option>
+                                        <option value="12" selected>12 Meses</option>
+                                        <option value="18">18 Meses</option>
+                                        <option value="24">24 Meses</option>
+                                        <option value="36">36 Meses</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Resultados de la Simulación en Vivo -->
+                            <div class="bg-light p-3 rounded border mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="text-muted small">Cuota Mensual Estimada:</span>
+                                    <strong id="resCuotaMensual" class="text-primary fs-5">$ 0</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="text-muted small">Intereses Totales:</span>
+                                    <span id="resTotalIntereses" class="fw-semibold text-dark">$ 0</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-muted small">Valor Total a Pagar:</span>
+                                    <span id="resTotalPagar" class="fw-bold text-dark">$ 0</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 fw-semibold py-2">
+                                <i class="bi bi-send-check me-1"></i> Solicitar este Crédito
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Estado de Préstamos Activos -->
+            <div class="col-lg-7">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-clock-history me-1"></i> Estado de Mis Préstamos Activos
+                        </h5>
+                    </div>
+                    <div class="card-body p-0 table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>N° Crédito</th>
+                                    <th>Valor Acordado</th>
+                                    <th>Tasa</th>
+                                    <th>Cuotas</th>
+                                    <th>Fecha Crédito</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaMisPrestamos">
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted py-4">Cargando tus préstamos...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../Controladores/misPrestamos.js?v=1"></script>
+</body>
+
+</html>

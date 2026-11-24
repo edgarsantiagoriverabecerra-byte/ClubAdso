@@ -10,6 +10,11 @@
 <body>
     <div class="Contenedorformulario">
         <div>
+            <div style="display: flex; justify-content: flex-start; margin-bottom: 15px;">
+                <button type="button" onclick="volverPaginaAnterior()" class="btn-secundario" style="width: auto; padding: 6px 14px; font-size: 13px; border-radius: 4px;">
+                    &larr; Volver
+                </button>
+            </div>
             <h2>Registro de asociado - Acerias</h2>
             <form id="FormRegistro" action="../Modelos/guardarAsociado.php" method="post">
                 <div class="grupo-input">
@@ -89,9 +94,8 @@
                 </div>
                 <div class="grupo-botones">
                     <button type="submit">Registrarme</button>
-                </div>
-                <div class="grupo-botones">
                     <button type="reset">Borrar</button>
+                    <button type="button" onclick="volverPaginaAnterior()" class="btn-secundario">Regresar</button>
                 </div>
                 <p id="mensajeRegistro" role="status" aria-live="polite">
 
@@ -102,6 +106,15 @@
             </p>
         </div>
     </div>
-    <script src="../Controladores/Asociado.js"></script>
+    <script>
+        function volverPaginaAnterior() {
+            if (document.referrer && (document.referrer.includes("/vista/") || document.referrer.includes("/Vista/"))) {
+                window.history.back();
+            } else {
+                window.location.href = "gestionAsociados.html";
+            }
+        }
+    </script>
+    <script src="../Controladores/Asociado.js?v=6"></script>
 </body>
 </html>

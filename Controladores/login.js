@@ -33,6 +33,7 @@ if (formulario) {
             if (!respuesta.ok || !resultado.success) {
                 if (mensaje) {
                     mensaje.textContent =
+                        resultado.mensaje ||
                         resultado.message ||
                         "No fue posible iniciar sesión, verifique su usuario o contraseña.";
                 }

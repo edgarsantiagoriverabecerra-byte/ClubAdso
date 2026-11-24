@@ -21,7 +21,7 @@ try {
 
     $campos = ["documento", "nombres", "apellidos", "fechaNacimiento", "genero", "direccionResidencia", "ciudad", "telefono", "email", "contraseña"];
     foreach ($campos as $campo) { 
-        if (!isset($datos[$campo]) || trim($datos[$campo]) === '') {
+        if (!isset($datos[$campo]) || trim((string) $datos[$campo]) === '') {
             http_response_code(400);
             throw new Exception("Falta el campo: " . $campo);
         }
@@ -33,31 +33,43 @@ try {
     }
 
     $asociado = new Asociado($datos);
-    
-    // Ejecución única del método guardar
     $resultado = $asociado->guardar();
 
     if ($resultado) {
         http_response_code(201);
-        echo json_encode(["success" => true, "mensaje" => "Asociado guardado con éxito","redirect" => "..Vista/Login.html"]);
-
+        echo json_encode([
+            "success" => true, 
+            "mensaje" => "Asociado guardado con éxito",
+            "redirect" => "Login.html"
+        ], JSON_UNESCAPED_UNICODE);
     } else {
         http_response_code(500);
-        echo json_encode(["success" => false, "mensaje" => "Error al guardar el asociado"]);
+        echo json_encode([
+            "success" => false, 
+            "mensaje" => "Error al guardar el asociado"
+        ], JSON_UNESCAPED_UNICODE);
     }
     
 } catch (PDOException $e) {
     if ($e->getCode() == 23000) {
         http_response_code(409);
-        echo json_encode(["success" => false, "mensaje" => "El documento o el correo ya existen en la base de datos"]);
+        echo json_encode([
+            "success" => false, 
+            "mensaje" => "El documento o el correo ya existen en la base de datos"
+        ], JSON_UNESCAPED_UNICODE);
     } else {  
         http_response_code(500);
-        echo json_encode(["success" => false, "mensaje" => "Error en la base de datos: " . $e->getMessage()]);
+        echo json_encode([
+            "success" => false, 
+            "mensaje" => "Error en la base de datos: " . $e->getMessage()
+        ], JSON_UNESCAPED_UNICODE);
     }
 } catch (Exception $e) {
     if (http_response_code() === 200) {
         http_response_code(400);
     }
-    echo json_encode(["success" => false, "mensaje" => $e->getMessage()]);
+    echo json_encode([
+        "success" => false, 
+        "mensaje" => $e->getMessage()
+    ], JSON_UNESCAPED_UNICODE);
 }
-?>

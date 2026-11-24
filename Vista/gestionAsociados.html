@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <title>Gestión de Asociados</title>
+</head>
+
+<body class="bg-light">
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="text-danger fw-bold mb-0">Gestión de Asociados</h3>
+            <div class="d-flex gap-2">
+                <a href="Registro.html" class="btn btn-dark btn-sm">
+                    <i class="bi bi-person-plus"></i> Nuevo Asociado
+                </a>
+                <a href="dashboard.html" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-arrow-left"></i> Volver al Panel
+                </a>
+            </div>
+        </div>
+
+        <div id="mensajeGestion" class="mb-3 small fw-semibold"></div>
+
+        <div class="card shadow-sm">
+            <div class="card-body table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Documento</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Género</th>
+                            <th>Ciudad</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaAsociados">
+                        <tr>
+                            <td colspan="8" class="text-center text-muted">Cargando asociados...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Asociado -->
+    <div class="modal fade" id="modalEditarAsociado" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Editar Asociado</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="formEditarAsociado">
+                    <div class="modal-body row g-3">
+                        <input type="hidden" id="edit_idAsociado" name="idAsociado">
+
+                        <div class="col-md-6">
+                            <label for="edit_documento" class="form-label">Documento</label>
+                            <input type="text" class="form-control" id="edit_documento" name="documento" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edit_fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" id="edit_fechaNacimiento" name="fechaNacimiento" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edit_nombres" class="form-label">Nombres</label>
+                            <input type="text" class="form-control" id="edit_nombres" name="nombres" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edit_apellidos" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="edit_apellidos" name="apellidos" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edit_genero" class="form-label">Género</label>
+                            <select class="form-select" id="edit_genero" name="genero" required>
+                                <option value="">Seleccione...</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edit_ciudad" class="form-label">Ciudad</label>
+                            <input type="text" class="form-control" id="edit_ciudad" name="ciudad" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edit_telefono" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="edit_telefono" name="telefono" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edit_email" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="edit_email" name="email" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="edit_direccionResidencia" class="form-label">Dirección de residencia</label>
+                            <input type="text" class="form-control" id="edit_direccionResidencia" name="direccionResidencia" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../Controladores/Asociado.js?v=6"></script>
+</body>
+
+</html>
