@@ -1,112 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: beige;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(220, 38, 38, 0.22), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(37, 99, 235, 0.22), transparent 45%),
+        linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px;
+    padding: 28px 18px;
+    color: #1e293b;
 }
 
 h2 {
-    color: black;
-    margin-bottom: 20px;
+    color: #0f172a;
+    margin-bottom: 22px;
     font-size: 24px;
+    font-weight: 800;
     text-align: center;
-    border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.auth-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #dc2626;
 }
 
 .grupo-input {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
     display: flex;
     flex-direction: column;
+    gap: 6px;
+}
+
+.grupo-input label {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.grupo-input label:has(input[type="radio"]) {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 0;
 }
 
 .grupo-botones {
     display: flex;
     gap: 10px;
-    margin-top: 15px;
+    margin-top: 16px;
 }
 
 button {
     flex: 1;
-    padding: 12px;
+    padding: 12px 16px;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+button:active {
+    transform: scale(0.98);
 }
 
 input, select {
-    padding: 10px;
-    border: 1px solid skyblue;
-    border-radius: 5px;
-    font-size: 15px;
+    padding: 11px 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 14.5px;
+    background-color: #f8fafc;
+    color: #0f172a;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #dc2626;
 }
 
 input:focus, select:focus {
-    border-color: rgb(54, 54, 212);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background-color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
 }
 
 .contenedor_formulario, .Contenedorformulario {
-    background-color: #f7f9fa;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.97);
+    padding: 34px 32px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
     width: 100%;
     max-width: 520px;
+    position: relative;
+    overflow: hidden;
+}
+
+.contenedor_formulario::before, .Contenedorformulario::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #dc2626, #2563eb);
 }
 
 button[type="submit"] {
-    background-color: #0d6efd;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     color: white;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.28);
 }
 
 button[type="submit"]:hover {
-    background-color: #0b5ed7;
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.38);
 }
 
-button[type="reset"] {
-    background-color: #6c757d;
+button[type="reset"], button.btn-secundario {
+    background-color: #64748b;
     color: white;
 }
 
-button[type="reset"]:hover {
-    background-color: #5c636a;
+button[type="reset"]:hover, button.btn-secundario:hover {
+    background-color: #475569;
 }
 
 .texto-link {
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
-    color: #666;
+    color: #64748b;
 }
 
 .texto-link a {
-    color: #0056b3;
+    color: #2563eb;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .texto-link a:hover {
     text-decoration: underline;
-}
-
-button.btn-secundario {
-    background-color: #6c757d;
-    color: white;
-}
-
-button.btn-secundario:hover {
-    background-color: #5c636a;
 }

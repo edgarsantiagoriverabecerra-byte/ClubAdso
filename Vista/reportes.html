@@ -7,46 +7,25 @@
     <title>Reportes Financieros y Saldos - Club Acerías</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <style>
-        .card-kpi {
-            border: none;
-            border-radius: 12px;
-            transition: transform 0.2s;
-        }
-        .card-kpi:hover {
-            transform: translateY(-3px);
-        }
-        .kpi-icon {
-            font-size: 2.2rem;
-            opacity: 0.85;
-        }
-        @media print {
-            .no-print {
-                display: none !important;
-            }
-            .card {
-                border: 1px solid #ddd !important;
-                box-shadow: none !important;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../Assets/css/paneles.css?v=2">
 </head>
 
-<body class="bg-light">
+<body class="panel-body">
     <div class="container py-4">
         <!-- Encabezado -->
-        <div class="d-flex justify-content-between align-items-center mb-4 no-print">
-            <div>
-                <h3 class="text-danger fw-bold mb-0">
-                    <i class="bi bi-graph-up-arrow me-2"></i>Reportes: Consultas y Saldos
-                </h3>
-                <small class="text-muted">Balance financiero global, cartera de préstamos y recaudos del club</small>
+        <div class="panel-topbar d-flex justify-content-between align-items-center flex-wrap gap-3 no-print">
+            <div class="d-flex align-items-center gap-3">
+                <span class="panel-title-icon"><i class="bi bi-graph-up-arrow"></i></span>
+                <div>
+                    <h3 class="text-danger fw-bold mb-0">Reportes: Consultas y Saldos</h3>
+                    <small class="text-muted">Balance financiero global, cartera de préstamos y recaudos del club</small>
+                </div>
             </div>
             <div class="d-flex gap-2">
-                <button type="button" class="btn btn-outline-dark btn-sm" onclick="window.print()">
+                <button type="button" class="btn btn-outline-dark btn-sm px-3" onclick="window.print()">
                     <i class="bi bi-printer me-1"></i> Imprimir Reporte
                 </button>
-                <a href="dashboard.html" class="btn btn-danger btn-sm">
+                <a href="dashboard.html" class="btn btn-danger btn-sm px-3">
                     <i class="bi bi-arrow-left me-1"></i> Volver al Panel
                 </a>
             </div>
@@ -57,10 +36,10 @@
         <!-- Fila de Tarjetas de Resumen (KPIs) -->
         <div class="row g-3 mb-4">
             <div class="col-md-3">
-                <div class="card card-kpi bg-primary text-white shadow-sm p-3">
+                <div class="card card-kpi kpi-blue text-white p-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <span class="small text-uppercase fw-semibold">Total Prestado</span>
+                            <span class="small text-uppercase fw-semibold opacity-75">Total Prestado</span>
                             <h4 id="kpiTotalPrestado" class="fw-bold mb-0 mt-1">$ 0</h4>
                         </div>
                         <i class="bi bi-cash-stack kpi-icon"></i>
@@ -68,10 +47,10 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-kpi bg-success text-white shadow-sm p-3">
+                <div class="card card-kpi kpi-green text-white p-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <span class="small text-uppercase fw-semibold">Total Pagado Cuotas</span>
+                            <span class="small text-uppercase fw-semibold opacity-75">Total Pagado Cuotas</span>
                             <h4 id="kpiTotalPagado" class="fw-bold mb-0 mt-1">$ 0</h4>
                         </div>
                         <i class="bi bi-check2-circle kpi-icon"></i>
@@ -79,10 +58,10 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-kpi bg-danger text-white shadow-sm p-3">
+                <div class="card card-kpi kpi-red text-white p-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <span class="small text-uppercase fw-semibold">Cartera Pendiente</span>
+                            <span class="small text-uppercase fw-semibold opacity-75">Cartera Pendiente</span>
                             <h4 id="kpiCarteraPendiente" class="fw-bold mb-0 mt-1">$ 0</h4>
                         </div>
                         <i class="bi bi-exclamation-octagon kpi-icon"></i>
@@ -90,10 +69,10 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-kpi bg-dark text-white shadow-sm p-3">
+                <div class="card card-kpi kpi-dark text-white p-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <span class="small text-uppercase fw-semibold">Recaudo Actividades</span>
+                            <span class="small text-uppercase fw-semibold opacity-75">Recaudo Actividades</span>
                             <h4 id="kpiRecaudoActividades" class="fw-bold mb-0 mt-1">$ 0</h4>
                         </div>
                         <i class="bi bi-calendar-event kpi-icon"></i>
@@ -103,7 +82,7 @@
         </div>
 
         <!-- Sección 1: Estados de Cuenta y Cartera de Asociados -->
-        <div class="card shadow-sm border-0 mb-4">
+        <div class="card card-panel mb-4">
             <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
                 <h5 class="fw-bold mb-0 text-dark">
                     <i class="bi bi-people-fill text-danger me-2"></i>Estados de Cuenta y Cartera por Asociado
@@ -116,8 +95,8 @@
                 </div>
             </div>
             <div class="card-body table-responsive p-0">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="table-dark">
+                <table class="table table-hover align-middle mb-0 table-panel">
+                    <thead class="bg-gradient-dark text-white">
                         <tr>
                             <th>Documento</th>
                             <th>Asociado</th>
@@ -139,14 +118,14 @@
         </div>
 
         <!-- Sección 2: Balance Histórico de Actividades y Distribución -->
-        <div class="card shadow-sm border-0">
+        <div class="card card-panel">
             <div class="card-header bg-white py-3">
                 <h5 class="fw-bold mb-0 text-dark">
                     <i class="bi bi-trophy-fill text-danger me-2"></i>Balance Histórico de Actividades y Distribución (50% Club / 50% Asociados)
                 </h5>
             </div>
             <div class="card-body table-responsive p-0">
-                <table class="table table-hover align-middle mb-0">
+                <table class="table table-hover align-middle mb-0 table-panel">
                     <thead class="table-secondary">
                         <tr>
                             <th>Actividad</th>

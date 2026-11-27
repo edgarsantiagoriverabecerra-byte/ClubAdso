@@ -7,19 +7,21 @@
     <title>Mis Préstamos: Simulación y Estado - Club Acerías</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../Assets/css/paneles.css?v=2">
 </head>
 
-<body class="bg-light">
+<body class="panel-body">
     <div class="container py-4">
         <!-- Encabezado -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <h3 class="text-primary fw-bold mb-0">
-                    <i class="bi bi-calculator-fill me-2"></i>Mis Préstamos: Simulación y Estado
-                </h3>
-                <small class="text-muted">Simula nuevos créditos y consulta el estado de tus préstamos activos</small>
+        <div class="panel-topbar tema-asociado d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+                <span class="panel-title-icon"><i class="bi bi-calculator-fill"></i></span>
+                <div>
+                    <h3 class="text-primary fw-bold mb-0">Mis Préstamos: Simulación y Estado</h3>
+                    <small class="text-muted">Simula nuevos créditos y consulta el estado de tus préstamos activos</small>
+                </div>
             </div>
-            <a href="dashboard.html" class="btn btn-outline-secondary btn-sm">
+            <a href="dashboard.html" class="btn btn-outline-secondary btn-sm px-3">
                 <i class="bi bi-arrow-left me-1"></i> Volver al Panel
             </a>
         </div>
@@ -29,8 +31,8 @@
         <div class="row g-4">
             <!-- 1. Simulador de Préstamos -->
             <div class="col-lg-5">
-                <div class="card shadow-sm border-0 h-100">
-                    <div class="card-header bg-primary text-white py-3">
+                <div class="card card-panel h-100">
+                    <div class="card-header bg-gradient-blue py-3">
                         <h5 class="card-title mb-0">
                             <i class="bi bi-sliders me-1"></i> Simulador de Crédito
                         </h5>
@@ -60,7 +62,7 @@
                             </div>
 
                             <!-- Resultados de la Simulación en Vivo -->
-                            <div class="bg-light p-3 rounded border mb-3">
+                            <div class="sim-resumen p-3 mb-3">
                                 <div class="d-flex justify-content-between mb-2">
                                     <span class="text-muted small">Cuota Mensual Estimada:</span>
                                     <strong id="resCuotaMensual" class="text-primary fs-5">$ 0</strong>
@@ -85,14 +87,14 @@
 
             <!-- 2. Estado de Préstamos Activos -->
             <div class="col-lg-7">
-                <div class="card shadow-sm border-0 h-100">
-                    <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center">
+                <div class="card card-panel h-100">
+                    <div class="card-header bg-gradient-dark py-3 d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0">
                             <i class="bi bi-clock-history me-1"></i> Estado de Mis Préstamos Activos
                         </h5>
                     </div>
                     <div class="card-body p-0 table-responsive">
-                        <table class="table table-hover align-middle mb-0">
+                        <table class="table table-hover align-middle mb-0 table-panel">
                             <thead class="table-light">
                                 <tr>
                                     <th>N° Crédito</th>
